@@ -1,0 +1,35 @@
+<resources>
+    <string name="app_name">Tiffin Service App for Admin</string>
+    <string name="tiffin_service">Tiffin Service</string>
+    <string name="or">or</string>
+    <string name="mobile_no">Mobile No</string>
+    <string name="already_have_an_account">Already have an account?</string>
+    <string name="username">Username</string>
+    <string name="login">Login</string>
+    <string name="don_t_have_account">Don\'t have account?</string>
+    <string name="sign_up">Sign-up</string>
+    <string name="password">Password</string>
+    <string name="verify">Verify</string>
+    <string name="did_nt_receive_the_code">Did\'nt receive the code?</string>
+    <string name="veg">Veg</string>
+    <string name="non_veg">Non veg</string>
+    <string name="availability">Availability</string>
+    <string name="not_active">Not Active</string>
+    <string name="active">Active</string>
+    <string name="subscribed">Subscribed</string>
+    <string name="description">Description</string>
+    <string name="service_name">Service name</string>
+    <string name="update">Update</string>
+    <string name="confirm">Confirm</string>
+    <string name="price_for_30_days">Price for 30 days</string>
+    <string name="add_image">Add Image</string>
+    <string name="name_of_service_provider">Name of service provider</string>
+    <string name="contact_number">Contact number</string>
+    <string name="upi_id_for_payments">UPI id for payments</string>
+    <string name="lunch">Lunch</string>
+    <string name="dinner">Dinner</string>
+    <string name="delivery_timings">Delivery timings:</string>
+    <string name="personal_details">Personal Details</string>
+    <string name="from">From</string>
+    <string name="to">To</string>
+</resources>
