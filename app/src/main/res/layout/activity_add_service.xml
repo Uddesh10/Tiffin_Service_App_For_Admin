@@ -58,7 +58,7 @@
         app:layout_constraintVertical_bias="0.199" />
 
     <EditText
-        android:id="@+id/sercice_description_edittext"
+        android:id="@+id/service_description_edittext"
         android:layout_width="313dp"
         android:layout_height="152dp"
         android:backgroundTint="@color/colorPrimary"
