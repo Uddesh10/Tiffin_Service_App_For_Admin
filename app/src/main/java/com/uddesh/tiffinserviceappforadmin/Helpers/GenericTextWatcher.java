@@ -1,12 +1,10 @@
 package com.uddesh.tiffinserviceappforadmin.Helpers;
 
-
 import android.content.Context;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
-
 import com.uddesh.tiffinserviceappforadmin.R;
 
 
@@ -14,7 +12,6 @@ public class GenericTextWatcher implements TextWatcher
 {
     private View view;
     private EditText[] otpEditText;
-    Context context;
     public GenericTextWatcher(View view , EditText[] otpEditText)
     {
         this.view = view;

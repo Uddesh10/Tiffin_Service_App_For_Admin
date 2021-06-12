@@ -155,6 +155,7 @@ public class SetAddressActivity extends AppCompatActivity implements OnMapReadyC
         permissionsManager.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 
+    // private functions
     @SuppressWarnings( {"MissingPermission"})
     private void enableLocationComponent(@NonNull Style loadedMapStyle) {
         if (PermissionsManager.areLocationPermissionsGranted(this)) {
