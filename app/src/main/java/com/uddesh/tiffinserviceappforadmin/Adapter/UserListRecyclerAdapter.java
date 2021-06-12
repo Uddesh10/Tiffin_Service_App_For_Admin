@@ -31,7 +31,7 @@ public class UserListRecyclerAdapter extends RecyclerView.Adapter<UserListRecycl
 }
 class UserListRecyclerViewHolder extends RecyclerView.ViewHolder
 {
-    TextView user_name_textview , subscribed_service_textview , user_contact_no_textview , user_address_textview;
+    private TextView user_name_textview , subscribed_service_textview , user_contact_no_textview , user_address_textview;
     public UserListRecyclerViewHolder(@NonNull View itemView) {
         super(itemView);
         user_address_textview = itemView.findViewById(R.id.user_address_textview);

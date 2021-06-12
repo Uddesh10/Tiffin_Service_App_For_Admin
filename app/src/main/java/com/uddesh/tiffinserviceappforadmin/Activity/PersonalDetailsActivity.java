@@ -13,11 +13,11 @@ import android.widget.TextView;
 import com.uddesh.tiffinserviceappforadmin.R;
 
 public class PersonalDetailsActivity extends AppCompatActivity {
-    CheckBox dinner_checkbox,veg_checkbox,non_veg_checkbox,lunch_checkbox;
-    EditText service_provider_name_edittext,contact_number_edittext, upi_edittext,editTextTime,editTextTime2,editTextTime3,editTextTime4;
-    LinearLayout linearLayout;
-    TextView textView,textView2;
-    Button confirm_button,update_button;
+    private CheckBox dinner_checkbox,veg_checkbox,non_veg_checkbox,lunch_checkbox;
+    private EditText service_provider_name_edittext,contact_number_edittext, upi_edittext,editTextTime,editTextTime2,editTextTime3,editTextTime4;
+    private LinearLayout linearLayout;
+    private TextView textView,textView2;
+    private Button confirm_button,update_button;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,17 +41,11 @@ public class PersonalDetailsActivity extends AppCompatActivity {
         update_button = findViewById(R.id.update_button);
 
 
-        confirm_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        confirm_button.setOnClickListener(v -> {
 
-            }
         });
-        update_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        update_button.setOnClickListener(v -> {
 
-            }
         });
 
 

@@ -14,10 +14,10 @@ import com.uddesh.tiffinserviceappforadmin.Helpers.GenericTextWatcher;
 import com.uddesh.tiffinserviceappforadmin.R;
 
 public class MainActivity extends AppCompatActivity {
-    ImageView logo_image_imageview;
-    Button sign_up_button, login_button, signup_up_form_signup_button, login_form_login_button, otp_verify_button;
-    TextView didnt_receive_code_textview , app_name_text_view, or_text_view, login_form_signup_textview ,sign_up_form_already_have_account_textview, sign_up_form_login_textview, otp_mobile_textview , resend_code_textview , login_form_dont_have_account_textview;
-    EditText signup_form_user_name_edit_text, sign_up_form_mobile_edit_text, signup_form_password_edit_text, login_form_username_edittext, login_form_password_edittext , otp_edittext1 ,otp_edittext4,otp_edittext5,otp_edittext2, otp_edittext3;
+    private ImageView logo_image_imageview;
+    private Button sign_up_button, login_button, signup_up_form_signup_button, login_form_login_button, otp_verify_button;
+    private TextView didnt_receive_code_textview , app_name_text_view, or_text_view, login_form_signup_textview ,sign_up_form_already_have_account_textview, sign_up_form_login_textview, otp_mobile_textview , resend_code_textview , login_form_dont_have_account_textview;
+    private EditText signup_form_user_name_edit_text, sign_up_form_mobile_edit_text, signup_form_password_edit_text, login_form_username_edittext, login_form_password_edittext , otp_edittext1 ,otp_edittext4,otp_edittext5,otp_edittext2, otp_edittext3;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,68 +64,44 @@ public class MainActivity extends AppCompatActivity {
 
     private void clickListeners()
     {
-        sign_up_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                animateStartButtons();
-                animateSignUpForm(1 , View.VISIBLE);
-            }
+        sign_up_button.setOnClickListener(v -> {
+            animateStartButtons();
+            animateSignUpForm(1 , View.VISIBLE);
         });
 
-        login_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                animateStartButtons();
-                animateLoginForm(1 , View.VISIBLE);
-            }
+        login_button.setOnClickListener(v -> {
+            animateStartButtons();
+            animateLoginForm(1 , View.VISIBLE);
         });
 
-        signup_up_form_signup_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                animateSignUpForm(0 , View.GONE);
-                animateOtpForm();
-            }
+        signup_up_form_signup_button.setOnClickListener(v -> {
+            animateSignUpForm(0 , View.GONE);
+            animateOtpForm();
         });
 
-        login_form_login_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                animateLoginForm(0 , View.GONE);
-                animateOtpForm();
-            }
+        login_form_login_button.setOnClickListener(v -> {
+            animateLoginForm(0 , View.GONE);
+            animateOtpForm();
         });
 
-        otp_verify_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent setAddressActivityIntent = new Intent(MainActivity.this , SetAddressActivity.class);
-                startActivity(setAddressActivityIntent);
-                finish();
-            }
+        otp_verify_button.setOnClickListener(v -> {
+            Intent setAddressActivityIntent = new Intent(MainActivity.this , SetAddressActivity.class);
+            startActivity(setAddressActivityIntent);
+            finish();
         });
 
-        sign_up_form_login_textview.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                animateSignUpForm(0 , View.GONE);
-                animateLoginForm(1 , View.VISIBLE);
-            }
+        sign_up_form_login_textview.setOnClickListener(view -> {
+            animateSignUpForm(0 , View.GONE);
+            animateLoginForm(1 , View.VISIBLE);
         });
 
-        login_form_signup_textview.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                animateLoginForm(0 , View.GONE);
-                animateSignUpForm(1 , View.VISIBLE);
-            }
+        login_form_signup_textview.setOnClickListener(view -> {
+            animateLoginForm(0 , View.GONE);
+            animateSignUpForm(1 , View.VISIBLE);
         });
 
-        resend_code_textview.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        resend_code_textview.setOnClickListener(view -> {
 
-            }
         });
 
     }

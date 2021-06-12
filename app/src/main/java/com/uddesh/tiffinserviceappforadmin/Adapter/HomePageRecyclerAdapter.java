@@ -30,7 +30,7 @@ public class HomePageRecyclerAdapter extends RecyclerView.Adapter<HomePageRecycl
 }
 class HomePageRecyclerViewHolder extends RecyclerView.ViewHolder
 {
-    TextView service_name_textview , service_active_textview , service_not_active_textview , subscribed_user_textview;
+    private TextView service_name_textview , service_active_textview , service_not_active_textview , subscribed_user_textview;
     public HomePageRecyclerViewHolder(@NonNull View itemView) {
         super(itemView);
 

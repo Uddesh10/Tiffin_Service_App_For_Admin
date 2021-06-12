@@ -19,9 +19,9 @@ import com.uddesh.tiffinserviceappforadmin.R;
 
 public class HomeFragment extends Fragment {
 
-    RecyclerView recyclerView;
-    HomePageRecyclerAdapter homePageRecyclerAdapterInstance;
-    FloatingActionButton add_service_fab;
+    private RecyclerView recyclerView;
+    private HomePageRecyclerAdapter homePageRecyclerAdapterInstance;
+    private FloatingActionButton add_service_fab;
     public HomeFragment() {
         // Required empty public constructor
     }

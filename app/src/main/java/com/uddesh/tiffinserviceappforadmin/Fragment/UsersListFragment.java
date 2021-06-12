@@ -16,8 +16,8 @@ import com.uddesh.tiffinserviceappforadmin.Adapter.UserListRecyclerAdapter;
 import com.uddesh.tiffinserviceappforadmin.R;
 
 public class UsersListFragment extends Fragment {
-    RecyclerView recyclerView;
-    UserListRecyclerAdapter userListRecyclerAdapterInstance;
+    private RecyclerView recyclerView;
+    private UserListRecyclerAdapter userListRecyclerAdapterInstance;
     public UsersListFragment() {
         // Required empty public constructor
     }

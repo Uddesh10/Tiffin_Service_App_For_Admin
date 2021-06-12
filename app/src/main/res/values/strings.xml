@@ -32,4 +32,7 @@
     <string name="personal_details">Personal Details</string>
     <string name="from">From</string>
     <string name="to">To</string>
+    <string name="mapbox_access_token">pk.eyJ1IjoidWRkZXNoMTkiLCJhIjoiY2twc2o2dXJiMGl1MjMxbW5oMHJuMjl6MCJ9.ONEYAfFCVRVUl8dD9xL-TA</string>
+    <string name="set_location">Set location</string>
+    <string name="enter_address">Enter address</string>
 </resources>
