@@ -11,10 +11,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import com.uddesh.tiffinserviceappforadmin.Adapter.UserListRecyclerAdapter;
 import com.uddesh.tiffinserviceappforadmin.R;
+import com.uddesh.tiffinserviceappforadmin.Repository.RetrofitViewModel;
 
 public class UsersListFragment extends Fragment {
-    private RecyclerView recyclerView;
     private UserListRecyclerAdapter userListRecyclerAdapterInstance;
+    private RetrofitViewModel viewModel;
     public UsersListFragment() {
         // Required empty public constructor
     }
@@ -40,9 +41,21 @@ public class UsersListFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        recyclerView = view.findViewById(R.id.user_list_recyclerview);
-        userListRecyclerAdapterInstance = new UserListRecyclerAdapter();
+        RecyclerView recyclerView = view.findViewById(R.id.user_list_recyclerview);
+        userListRecyclerAdapterInstance = new UserListRecyclerAdapter(getContext());
         recyclerView.setLayoutManager(new LinearLayoutManager( getContext() ,LinearLayoutManager.VERTICAL , false));
         recyclerView.setAdapter(userListRecyclerAdapterInstance);
+        viewModel = new RetrofitViewModel(getActivity().getApplication());
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        viewModel.getUserDetails().observe(this , result->{
+            if(result!=null)
+            {
+                userListRecyclerAdapterInstance.notifyDataSetChanged(result);
+            }
+        });
     }
 }

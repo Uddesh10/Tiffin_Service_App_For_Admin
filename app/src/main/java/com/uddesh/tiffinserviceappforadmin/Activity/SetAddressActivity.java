@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -26,7 +25,12 @@ import com.mapbox.mapboxsdk.plugins.annotation.Symbol;
 import com.mapbox.mapboxsdk.plugins.annotation.SymbolManager;
 import com.mapbox.mapboxsdk.plugins.annotation.SymbolOptions;
 import com.mapbox.mapboxsdk.utils.BitmapUtils;
+import com.uddesh.tiffinserviceappforadmin.BuildConfig;
+import com.uddesh.tiffinserviceappforadmin.DataModels.AdminLocationModel;
+import com.uddesh.tiffinserviceappforadmin.Helpers.SharedPreferencesHelper;
+import com.uddesh.tiffinserviceappforadmin.Helpers.ToastHelper;
 import com.uddesh.tiffinserviceappforadmin.R;
+import com.uddesh.tiffinserviceappforadmin.Repository.RetrofitViewModel;
 import java.util.List;
 
 
@@ -34,25 +38,54 @@ public class SetAddressActivity extends AppCompatActivity implements OnMapReadyC
     private MapView mapView;
     private PermissionsManager permissionsManager;
     private MapboxMap mapboxMap;
-    private Symbol symbol;
     private EditText address_edittext;
-    private Button set_location_button;
+    private SharedPreferencesHelper sharedPreferences;
+    private RetrofitViewModel viewModel;
+    private Symbol symbol;
+    private String location;
+    private double latitude , longitude;
+    private ToastHelper toast;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Mapbox.getInstance(this, getString(R.string.mapbox_access_token));
+        Mapbox.getInstance(this, BuildConfig.MapBoxApiKey);
         setContentView(R.layout.activity_set_address);
+        sharedPreferences = new SharedPreferencesHelper(this);
+        viewModel = new RetrofitViewModel(getApplication());
+        toast = new ToastHelper(this);
         mapView =  findViewById(R.id.map_view);
         mapView.onCreate(savedInstanceState);
         mapView.getMapAsync(this);
         address_edittext = findViewById(R.id.address_edittext);
-        set_location_button = findViewById(R.id.set_location_button);
+        Button set_location_button = findViewById(R.id.set_location_button);
         set_location_button.setOnClickListener(view -> {
-            Intent intent = new Intent(this , HomePageActivity.class);
-            startActivity(intent);
-            finish();
+            location = address_edittext.getText().toString();
+            String username = sharedPreferences.getSharedPreferences("username");
+            if(!location.equals("")) {
+                viewModel.updateAdminLocation(new AdminLocationModel(location, latitude, longitude, username)).observe(this, result -> {
+                    if (result) {
+                        if(getIntent().getBooleanExtra("fromHomePage" , false)){
+                            toast.makeToast("Location updated successfully" , Toast.LENGTH_LONG);
+                            Intent intent = new Intent(this, HomePageActivity.class);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                            startActivity(intent);
+                        }
+                        else{
+                            Intent intent = new Intent(this, PersonalDetailsActivity.class);
+                            startActivity(intent);
+                        }
+                        finish();
+                    } else {
+                        toast.makeToast("Something went wrong", Toast.LENGTH_LONG);
+                    }
+                });
+            }
+            else{
+                toast.makeToast("Enter the address" , Toast.LENGTH_LONG);
+            }
 
         });
+
     }
     @Override
     protected void onStart() {
@@ -114,38 +147,38 @@ public class SetAddressActivity extends AppCompatActivity implements OnMapReadyC
     @Override
     public void onMapReady(@NonNull MapboxMap mapboxMap) {
         SetAddressActivity.this.mapboxMap = mapboxMap;
-        mapboxMap.setStyle(Style.SATELLITE_STREETS, new Style.OnStyleLoaded() {
-            @Override
-            public void onStyleLoaded(@NonNull Style style) {
-                enableLocationComponent(style);
-                Location location = mapboxMap.getLocationComponent().getLastKnownLocation();
-                style.addImage("LOCATION_MARKER" , BitmapUtils.getBitmapFromDrawable(getResources().getDrawable(R.drawable.ic_location_marker)));
-                SymbolManager symbolManager = new SymbolManager(mapView, mapboxMap, style);
-                symbolManager.setIconAllowOverlap(true);
-                symbolManager.setTextAllowOverlap(true);
-                SymbolOptions symbolOptions = new SymbolOptions()
-                        .withLatLng(new LatLng(location.getLatitude() , location.getLongitude()))
-                        .withIconImage("LOCATION_MARKER")
-                        .withIconSize(1.3f)
-                        .withDraggable(true);
-                symbol = symbolManager.create(symbolOptions);
-                symbolManager.addDragListener(new OnSymbolDragListener() {
-                    @Override
-                    public void onAnnotationDragStarted(Symbol annotation) {
+        mapboxMap.setStyle(Style.SATELLITE_STREETS, style -> {
+            enableLocationComponent(style);
+            Location location = mapboxMap.getLocationComponent().getLastKnownLocation();
+            latitude = location.getLatitude();
+            longitude = location.getLongitude();
+            style.addImage("LOCATION_MARKER" , BitmapUtils.getBitmapFromDrawable(getResources().getDrawable(R.drawable.ic_location_marker)));
+            SymbolManager symbolManager = new SymbolManager(mapView, mapboxMap, style);
+            symbolManager.setIconAllowOverlap(true);
+            symbolManager.setTextAllowOverlap(true);
+            SymbolOptions symbolOptions = new SymbolOptions()
+                    .withLatLng(new LatLng(latitude , longitude))
+                    .withIconImage("LOCATION_MARKER")
+                    .withIconSize(1.3f)
+                    .withDraggable(true);
+            symbol = symbolManager.create(symbolOptions);
+            symbolManager.addDragListener(new OnSymbolDragListener() {
+                @Override
+                public void onAnnotationDragStarted(Symbol annotation) {
 
-                    }
+                }
 
-                    @Override
-                    public void onAnnotationDrag(Symbol annotation) {
+                @Override
+                public void onAnnotationDrag(Symbol annotation) {
 
-                    }
+                }
 
-                    @Override
-                    public void onAnnotationDragFinished(Symbol annotation) {
-                        Log.i("tag", symbol.getLatLng()+"");
-                    }
-                });
-            }
+                @Override
+                public void onAnnotationDragFinished(Symbol annotation) {
+                    latitude = location.getLatitude();
+                    longitude = location.getLongitude();
+                }
+            });
         });
 
     }

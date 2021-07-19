@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+            android:id="@+id/deactivateService"
+            android:title="@string/deactivate_service"
+            android:visible="false"/>
+    <item
+            android:id="@+id/activateService"
+            android:title="@string/activate_service"
+            />
+    <item
+            android:id="@+id/deleteService"
+            android:title="@string/delete_service"/>
+</menu>

@@ -32,7 +32,18 @@
     <string name="personal_details">Personal Details</string>
     <string name="from">From</string>
     <string name="to">To</string>
-    <string name="mapbox_access_token">pk.eyJ1IjoidWRkZXNoMTkiLCJhIjoiY2twc2o2dXJiMGl1MjMxbW5oMHJuMjl6MCJ9.ONEYAfFCVRVUl8dD9xL-TA</string>
     <string name="set_location">Set location</string>
     <string name="enter_address">Enter address</string>
+    <string name="logout">Logout</string>
+    <string name="change_location">Change location</string>
+    <string name="update_service">Update Service</string>
+    <string name="add_service">Add Service</string>
+    <string name="delete_service">Delete service</string>
+    <string name="deactivate_service">Deactivate service</string>
+    <string name="update_personal_details">Update Personal Details</string>
+    <string name="activate_service">Activate service</string>
+    <string name="fab">fab</string>
+    <string name="settings">settings</string>
+    <string name="service_settings">service settings</string>
+    <string name="service_logo">service logo</string>
 </resources>

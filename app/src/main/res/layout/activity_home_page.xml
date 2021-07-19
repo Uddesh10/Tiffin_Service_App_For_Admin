@@ -21,14 +21,16 @@
 
 
         <ImageView
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_weight="1"
-            android:paddingStart="3dp"
-            android:paddingEnd="0dp"
-            android:src="@drawable/ic_user_logo" />
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:paddingStart="3dp"
+                android:paddingEnd="0dp"
+                android:src="@drawable/ic_user_logo"
+                android:contentDescription="@string/username"/>
 
         <TextView
+            android:id="@+id/activityHomePageTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAlignment="textStart"
@@ -38,10 +40,12 @@
             android:fontFamily="@font/roboto_bold"/>
 
         <ImageView
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_weight="2"
-            android:src="@drawable/ic_settings"/>
+                android:id="@+id/activityHomePageImageView"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_weight="2"
+                android:src="@drawable/ic_settings"
+                android:contentDescription="@string/settings"/>
     </LinearLayout>
 
     <androidx.viewpager2.widget.ViewPager2

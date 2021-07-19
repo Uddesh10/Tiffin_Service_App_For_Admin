@@ -1,5 +1,6 @@
 package com.uddesh.tiffinserviceappforadmin.Fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -10,14 +11,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.uddesh.tiffinserviceappforadmin.Activity.AddServiceActivity;
 import com.uddesh.tiffinserviceappforadmin.Adapter.HomePageRecyclerAdapter;
 import com.uddesh.tiffinserviceappforadmin.R;
+import com.uddesh.tiffinserviceappforadmin.Repository.RetrofitViewModel;
 
 public class HomeFragment extends Fragment {
 
-    private RecyclerView recyclerView;
     private HomePageRecyclerAdapter homePageRecyclerAdapterInstance;
-    private FloatingActionButton add_service_fab;
+    private RetrofitViewModel viewModel;
     public HomeFragment() {
         // Required empty public constructor
     }
@@ -42,15 +44,25 @@ public class HomeFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        recyclerView = view.findViewById(R.id.homepage_recyclerview);
-        homePageRecyclerAdapterInstance = new HomePageRecyclerAdapter();
+        RecyclerView recyclerView = view.findViewById(R.id.homepage_recyclerview);
+        homePageRecyclerAdapterInstance = new HomePageRecyclerAdapter(getContext());
         recyclerView.setLayoutManager(new LinearLayoutManager( getContext() ,LinearLayoutManager.VERTICAL , false));
         recyclerView.setAdapter(homePageRecyclerAdapterInstance);
-        add_service_fab = view.findViewById(R.id.add_service_fab);
-        add_service_fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        viewModel = new RetrofitViewModel(getActivity().getApplication());
+        FloatingActionButton add_service_fab = view.findViewById(R.id.add_service_fab);
+        add_service_fab.setOnClickListener(view1 -> {
+            Intent intent = new Intent(getContext() , AddServiceActivity.class);
+            startActivity(intent);
+        });
+    }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        viewModel.getAllServiceDetails().observe(this , result->{
+            if(result!=null)
+            {
+                homePageRecyclerAdapterInstance.notifyDataSetChanged(result);
             }
         });
     }

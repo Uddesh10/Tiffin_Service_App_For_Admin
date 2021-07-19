@@ -1,5 +1,6 @@
 package com.uddesh.tiffinserviceappforadmin.Helpers;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -10,8 +11,8 @@ import com.uddesh.tiffinserviceappforadmin.R;
 
 public class GenericTextWatcher implements TextWatcher
 {
-    private View view;
-    private EditText[] otpEditText;
+    private final View view;
+    private final EditText[] otpEditText;
     public GenericTextWatcher(View view , EditText[] otpEditText)
     {
         this.view = view;
@@ -19,6 +20,7 @@ public class GenericTextWatcher implements TextWatcher
 
     }
 
+    @SuppressLint("NonConstantResourceId")
     @Override
     public void afterTextChanged(Editable editable) {
         String text = editable.toString();
@@ -48,8 +50,16 @@ public class GenericTextWatcher implements TextWatcher
                     otpEditText[2].requestFocus();
                 break;
             case R.id.otp_edittext5:
-                if(text.length()==0)
+                if(text.length()==1)
+                    otpEditText[5].requestFocus();
+                else if(text.length()==0)
                     otpEditText[3].requestFocus();
+                break;
+            case R.id.otp_edittext6:
+                if(text.length()==0){
+                    otpEditText[4].requestFocus();
+                }
+                break;
 
 
         }
